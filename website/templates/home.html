@@ -1,23 +1,60 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="col-md-6 offset-md-3">
-    {% if user.is_authenticated %}
-    {% else %}
-    <h1> Connexion </h1>
-    <form method="POST" action="{% url 'home' %}">
-        {% csrf_token %}
-        <div class="mb-3">
-            <input type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" required>
-        </div>
-        <br>
-        <div class="mb-3">
-            <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
-        </div>
-        <br>
-        <button type="submit" class="btn btn-secondary">Se connecter</button>
-    </form>
-    {% endif %}
-</div>
 
+    {% if user.is_authenticated %}
+
+        <table class="table table-striped table-hover table-bordered">
+          <thead class="table-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Téléphone</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Adresse</th>
+                    <th scope="col">Ville </th>
+                    <th scope="col">Code postal</th>
+                    <th scope="col">Date</th>
+
+                </tr>
+          </thead>
+          <tbody>
+
+            {% for record in records%}
+            <tr>
+                <td> <a href="{% url 'record' record.id %}" {{ record.id}}>{{ record.id}}</td>
+                <td>{{ record.first_name}}
+                {{ record.last_name}}</td>
+                <td>{{ record.phone}}</td>
+                <td>{{ record.email}}</td>
+                <td>{{ record.adress}}</td>
+                <td>{{ record.state}}</td>
+                <td>{{ record.zipcode}}</td>
+                <td>{{record.created_at}}</td>
+
+            </tr>
+            {% endfor %}
+
+
+          </tbody>
+        </table>
+
+        {% else %}
+        <div class="col-md-6 offset-md-3">
+            <h1> Connexion </h1>
+            <form method="POST" action="{% url 'home' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" required>
+                </div>
+                <br>
+                <div class="mb-3">
+                    <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-secondary">Se connecter</button>
+            </form>
+        </div>
+
+    {% endif %}
 {% endblock %}
