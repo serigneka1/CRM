@@ -10,17 +10,22 @@
         {% if user.is_authenticated %}
 
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'logout' %}">Se déconnecter </a>
+          <a class="nav-link" href="{% url 'add_record' %}">Ajouter un client</a>
+        </li>
+
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Se déconnecter</a>
         </li>
 
         {% else %}
 
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'home' %}">Se Connecter </a>
+          <a class="nav-link" href="{% url 'home' %}">Se Connecter</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'register' %}"> Créer un compte </a>
+          <a class="nav-link" href="{% url 'register' %}">Créer un compte</a>
         </li>
 
         {% endif %}
