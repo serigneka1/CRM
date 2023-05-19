@@ -24,11 +24,11 @@
   </div>
 </div>
 <br>
-<a href="{% url 'home' %}" class="btn btn-secondary">Retour</a>
+<a href="{% url 'website:records' %}" class="btn btn-secondary">Retour</a>
 
-<a href="{% url 'delete_record' customer_record.id %}" class="btn btn-danger">Supprimer </a>
+<a href="{% url 'website:delete_record' customer_record.id %}" class="btn btn-danger">Supprimer </a>
 
-<a href="{% url 'update_record' customer_record.id %}" class="btn btn-secondary">Modifier</a>
+<a href="{% url 'website:update_record' customer_record.id %}" class="btn btn-success">Modifier</a>
 
 
 {% endblock%}

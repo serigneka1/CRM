@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<div class="py-6 px-6">
+
+    <h1 class="text-xl"> Ajouter un prospect</h1>
+    <form method="post" action=".">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Créer</button>
+    </form>
+</div>
+
+{% endblock %}

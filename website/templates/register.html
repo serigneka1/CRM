@@ -1,34 +1,40 @@
 {% extends 'base.html' %}
+
 {% block content %}
-
-<div class="col-md-6 offset-md-3">
-    <h1> Créer un compte </h1>
-    <br>
-    <form method="POST">
-        {% csrf_token %}
-        {% if form.errors %}
-        <div class="" role="alert">
-            Il y a des erreurs
+<div class="container ">
+    <div class="col-md-6 offset-md-3 border p-4 bg-white">
+        <h1 class="text-center text-muted fw-bold ">Jamila</h1>
+        <p class="text-center custom-heading"> Inscrivez-vous pour accéder aux fonctionnalités qu'offre Jamila</p>
+        <form method="POST" action="">
+            {% csrf_token %}
             {% for field in form %}
-            {% for error in field.errors %}
-            <div class="alert alert-danger">{{ error }}</div>
+                <div class="mb-3">
+                    {% if field.name == 'username' %}
+                        <label for="{{ field.id_for_label }}"></label>
+                        <input type="text" name="{{ field.name }}" class="form-control" placeholder="{{ field.label }}" required>
+                    {% elif field.name == 'password1' %}
+                        <label for="{{ field.id_for_label }}">Mot de passe</label>
+                        <input type="password" name="{{ field.name }}" class="form-control" required>
+                    {% elif field.name == 'password2' %}
+                        <label for="{{ field.id_for_label }}">Confirmation du mot de passe</label>
+                        <input type="password" name="{{ field.name }}" class="form-control" required>
+                    {% else %}
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                    {% endif %}
+                    {% if field.errors %}
+                        <div class="text-danger">
+                            {% for error in field.errors %}
+                                <small>{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
             {% endfor %}
-            {% endfor %}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {% endif %}
-        {% for field in form %}
-        <div class="form-group">
-            {{ field.label_tag }}
-            {{ field }}
-            {% if field.help_text %}
-            <small class="form-text text-muted">{{ field.help_text }}</small>
-            {% endif %}
-        </div>
-        {% endfor %}
-        <br>
-        <button type="submit" class="btn btn-secondary">S'inscrire</button>
-    </form>
+            <button type="submit" class="btn btn-success">S'inscrire</button>
+            <br>
+            <p>Vous avez un compte? <a href="{% url 'website:site'%}">Connectez-vous</a> </p>
+        </form>
+    </div>
 </div>
-
 {% endblock %}

@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1> liste de factures</h1>
+<a href="{% url 'facturation:facturer' %}" class="btn btn-secondary">Creer une facture</a>
+<a href="{% url 'website:site' %}" class="btn btn-secondary">Retour</a>
+{% endblock %}

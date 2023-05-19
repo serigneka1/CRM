@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+
+    <div class="container">
+        <div class="row" >
+            <div class="col-md-3 mb-4">
+                <a href="{% url 'website:records'%}" class="text-decoration-none">
+                    <div class="bg-white rounded shadow-sm p-4">
+                        <h3 class="font-weight-bold text-dark text-center">CRM</h3>
+                        <p class="text-center text-dark">Les informations client</p>
+                        <button class="btn btn-success">Accéder</button>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3 mb-4">
+                <a href="{% url 'facturation:factures'%}" class="text-decoration-none">
+                    <div class="bg-white rounded shadow-sm p-4">
+                        <h3 class="font-weight-bold text-dark text-center">Mes factures</h3>
+                        <p class="text-center text-dark">Liste des factures</p>
+                        <button class="btn btn-success">Accéder</button>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3 mb-4">
+                <a href="{% url 'todo:todo'%}" class="text-decoration-none">
+                    <div class="bg-white rounded shadow-sm p-4">
+                        <h3 class="font-weight-bold text-dark text-center">To do</h3>
+                        <p class="text-center text-dark">Tâches à réaliser</p>
+                        <button class="btn btn-success">Accéder</button>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <a href="{% url 'leads:leads_list'%}" class="text-decoration-none">
+                    <div class="bg-white rounded shadow-sm p-4">
+                        <h3 class="font-weight-bold text-dark text-center">Prospects</h3>
+                        <p class="text-center text-dark">Potentiels clients</p>
+                        <button class="btn btn-success">Accéder</button>
+                    </div>
+                </a>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+    {% else %}
+    <div class="container bg-white">
+        <div class="col-md-6 offset-md-3 border p-3 ">
+            <h1 class="text-center"> Jamila </h1>
+            <form method="POST" action="{% url 'website:site' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" required>
+                </div>
+                <br>
+                <div class="mb-3">
+                    <input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Se connecter</button>
+                <br>
+
+            </form>
+            <br>
+            <p>Vous n'avez pas de compte? <a href="{% url 'website:register'%}">Inscrivez-vous</a> </p>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

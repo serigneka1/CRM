@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="py-6 px-6">
+        <h1 class="text-xl">Liste des prospects</h1>
+        <a class="nav-link bg-success w-100 rounded text-center fs-6 mt-4" href="{% url 'leads:add_lead' %}">
+            <span>Ajouter un prospect</span>
+        </a>
+
+            <div class="d-flex justify-content-between mt-4">
+                <p class="py-2 px-2 bg-secondary text-center fs-6 font-semibold w-100">Nom</p>
+                <p class="py-2 px-2 bg-secondary  text-center fs-6 font-semibold w-100">Priorité</p>
+                <p class="py-2 px-2 bg-secondary   text-center fs-6 font-semibold w-100">Statut</p>
+            </div>
+         {% for lead in leads %}
+            <div class="d-flex justify-content-between {% cycle 'bg-gray-100' 'bg-white' %}">
+                <p class="py-2 px-2 w-full"><a href="{% url 'leads_detail' lead.id %}">{{ lead.name }}</a></p>
+                <p class="py-2 px-2 w-full">{{ lead.get_priority_display }}</p>
+                <p class="py-2 px-2 w-full">{{ lead.get_status_display }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

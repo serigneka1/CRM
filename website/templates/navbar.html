@@ -1,35 +1,50 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
   <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'home' %}">CRM</a>
+
+    <a class="navbar-brand" href="{% url 'website:site' %}">Jamila</a>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
         {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'leads:leads_list' %}">Liste des prospects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'leads:add_lead' %}">Ajouter un prospect</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'website:add_record' %}">Ajouter un client</a>
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'add_record' %}">Ajouter un client</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'facturation:facturer' %}">Facturer</a>
+          </li>
 
-
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'logout' %}">Se déconnecter</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'website:logout' %}">Se déconnecter</a>
+          </li>
 
         {% else %}
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'home' %}">Se Connecter</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'website:site' %}">Se Connecter</a>
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'register' %}">Créer un compte</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'website:register' %}">Créer un compte</a>
+          </li>
 
         {% endif %}
       </ul>
+
     </div>
+
   </div>
+
 </nav>

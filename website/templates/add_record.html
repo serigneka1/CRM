@@ -2,7 +2,7 @@
 {% block content %}
 <div class="col-md-6 offset-md-3">
 <h1> Ajouter </h1>
-    <form method="POST" action="{% url 'add_record' %}">
+    <form method="POST" action="{% url 'website:add_record' %}">
         {% csrf_token %}
         {{ form.as_p }}
 
@@ -11,7 +11,7 @@
 
         <br>
         <button type="submit" class="btn btn-secondary">Ajouter client</button>
-        <a href="{% url 'home' %}" class="btn btn-secondary">Retour</a>
+        <a href="{% url 'website:records' %}" class="btn btn-secondary">Retour</a>
     </form>
 
 </div>
