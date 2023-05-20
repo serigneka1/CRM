@@ -3,6 +3,34 @@
 {% block content %}
     <div class="py-6 px-6">
         <h1 class="mb-4 text-xl"> {{ lead.name}}</h1>
+
+
+        {% if lead.description %}
+       <p><strong>Nom</strong></p>
+        <p class="mb-4"> {{lead.description}} </p>
+        {% endif %}
+
+       <p><strong>Priorité</strong></p>
+        <p class="mb-4"> {{lead.get_priority_display}} </p>
+
+       <p><strong>Statut</strong></p>
+        <p class="mb-4"> {{lead.get_status_display}} </p>
+
+       <p><strong>Crée le</strong></p>
+        <p class="mb-4"> {{lead.created_at}} </p>
+
+        <p><strong>Modifié le</strong></p>
+        <p class="mb-4"> {{lead.modified_at}} </p>
+
+        <hr class="my-2">
+        <a href="{% url 'leads:leads_delete' lead.id %}" class=" btn btn-danger">Supprimer</a>
+        <a href="{% url 'leads:leads_edit' lead.id %}" class=" btn btn-success">Modifier</a>
+        <hr class="my-2">
+        <a href="{% url 'leads:leads_list' %}" class=" btn">Retour</a>
+
+
+        
+        
     </div>
 
 {% endblock%}
