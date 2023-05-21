@@ -23,6 +23,7 @@
         <p class="mb-4"> {{lead.modified_at}} </p>
 
         <hr class="my-2">
+        <a href="{% url 'leads:leads_convert' lead.id %}" class=" btn btn-secondary">Convertir en client</a>
         <a href="{% url 'leads:leads_delete' lead.id %}" class=" btn btn-danger">Supprimer</a>
         <a href="{% url 'leads:leads_edit' lead.id %}" class=" btn btn-success">Modifier</a>
         <hr class="my-2">

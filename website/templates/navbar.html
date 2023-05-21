@@ -13,18 +13,13 @@
 
         {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'leads:leads_list' %}">Liste des prospects</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'leads:add_lead' %}">Ajouter un prospect</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'website:add_record' %}">Ajouter un client</a>
+            <a class="nav-link" href="{% url 'leads:leads_list' %}">Prospects</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'facturation:facturer' %}">Facturer</a>
+            <a class="nav-link" href="{% url 'client:clients_list' %}">Clients</a>
           </li>
+
 
           <li class="nav-item">
             <a class="nav-link" href="{% url 'website:logout' %}">Se déconnecter</a>

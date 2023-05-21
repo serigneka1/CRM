@@ -11,5 +11,6 @@ urlpatterns = [
     path('team/', include('team.urls')),
     path('todo/', include('todo.urls')),
     path('leads/', include('leads.urls')),
+    path('client/', include('client.urls')),
 
 ]

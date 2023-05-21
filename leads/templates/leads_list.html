@@ -6,7 +6,7 @@
         <a class="nav-link bg-success w-100 rounded text-center fs-6 mt-4" href="{% url 'leads:add_lead' %}">
             <span>Ajouter un prospect</span>
         </a>
-
+        {% if leads %}
             <div class="d-flex justify-content-between mt-4">
                 <p class="py-2 px-2 bg-secondary text-center fs-6 font-semibold w-100">Nom</p>
                 <p class="py-2 px-2 bg-secondary  text-center fs-6 font-semibold w-100">Priorité</p>
@@ -19,5 +19,8 @@
                 <p class="py-2 px-2 w-full">{{ lead.get_status_display }}</p>
             </div>
         {% endfor %}
+        {% else %}
+        <p class="mt-4"> Il n y a pas de prospects dans la base de données ...</p>
+        {% endif%}
     </div>
 {% endblock %}
