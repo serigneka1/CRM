@@ -2,5 +2,37 @@
 
 {% block content %}
 
-<h1> Dashboard </h1>
+<div class="py-6 px-6">
+    <h1 class="text-xl mb-1 text-center">Dashboard</h1>
+    <div class="row">
+        <div class="col-md-6 bg-light leads-column mb-4">
+            <h4 class="mb-3 text-lg">Plus récents prospects</h4>
+            <hr>
+            {% for lead in leads %}
+            <div class="mb-2 lead">
+                <h3 class="font-weight-bold" style="font-size: 14px;" >{{ lead.name }}</h3>
+                <p class="text-muted" style="font-size: 14px;">Statut: {{ lead.get_status_display }}</p>
+                <p class="text-muted" style="font-size: 14px;">Priorité: {{ lead.get_priority_display }}</p>
+                <a href="{% url 'leads:leads_detail' lead.pk %}" style="font-size: 14px;">Voir plus</a>
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-6 px-4 py-6 bg-light rounded-xl clients-column">
+            <h4 class="mb-1 text-lg">Plus récents clients</h4>
+            <hr>
+            {% for client in clients %}
+            <div class="mb-6 client">
+                <h3 class="font-weight-bold" style="font-size: 14px;">{{ client.name }}</h3>
+                <a href="{% url 'client:clients_detail' client.pk %}" style="font-size: 14px;">Voir plus</a>
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
 {% endblock %}
+
+

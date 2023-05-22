@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from . forms import AddLeadForm
 from .models import Lead
+from team.models import Team
 from client.models import Client
 
 
@@ -44,10 +45,12 @@ def leads_edit(request, pk):
 @login_required
 def add_lead(request):
     if request.method=='POST':
+        team = Team.objects.filter(created_by=request.user).first()
         form=AddLeadForm(request.POST)
         if form.is_valid():
             lead=form.save(commit=False)
             lead.created_by=request.user
+            lead.team = team
             lead.save()
             messages.success(request, 'Un prospect a été ajouté')
             return redirect('leads:leads_list')
@@ -59,13 +62,19 @@ def add_lead(request):
 @login_required
 def convert_to_client(request, pk):
     lead = get_object_or_404(Lead, created_by=request.user, pk=pk)
-    client=Client.objects.create(
-        name=lead.name,
-        email=lead.email,
-        description=lead.description,
-        created_by=request.user,
-    )
-    lead.converted_to_client=True
-    lead.save()
-    messages.success(request, 'Le prospect est converti en un client')
+    team = Team.objects.filter(created_by=request.user).first()
+    if team:
+        client = Client.objects.create(
+            name=lead.name,
+            email=lead.email,
+            description=lead.description,
+            created_by=request.user,
+            team=team,
+        )
+        lead.converted_to_client = True
+        lead.save()
+        messages.success(request, 'Le prospect est converti en un client')
+    else:
+        messages.error(request, 'Vous devez avoir une équipe pour convertir un prospect en client')
+
     return redirect('leads:leads_list')

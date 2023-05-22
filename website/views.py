@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm, AddRecordForm
 from .models import Record
+from team.models import Team
 
 
 def site(request):
@@ -39,21 +41,21 @@ def logout_user(request):
 
 def register_user(request):
     if request.method == "POST":
-        form= SignUpForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
             # Authenticate and login
-            username=form.cleaned_data['username']
+            username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
-
             login(request, user)
+            # Message success before redirect
             messages.success(request, 'Votre compte a été bien créé. Bienvenue chez vous !')
             return redirect('website:site')
     else:
         form = SignUpForm()
-        return render(request, 'register.html', {"form":form})
     return render(request, 'register.html', {"form": form})
+
 
 def customer_record(request, pk):
     if request.user.is_authenticated:
@@ -101,3 +103,8 @@ def update_record(request,pk):
     else:
         messages.success(request, "Vous devez d'abord vous connectez...")
         return redirect('website:site')
+
+@login_required
+def my_account(request):
+    team=Team.objects.filter(created_by=request.user).first()
+    return render(request, 'myaccount.html', {'team':team})

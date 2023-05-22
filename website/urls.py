@@ -7,6 +7,7 @@ urlpatterns = [
     path("", views.site, name='site'),
     path("crm/",views.records, name='records'),
     path("factures/",views.factures, name='factures'),
+    path("myaccount/", views.my_account, name="myaccount"),
     path("logout/",views.logout_user, name='logout'),
     path("register/",views.register_user, name='register'),
     path("record/<int:pk>",views.customer_record, name='record'),
