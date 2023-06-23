@@ -2,6 +2,24 @@
 
 {% block content %}
 <h1> liste de factures</h1>
+
+  {% if factures %}
+    <ul>
+      {% for facture in factures %}
+        <li>
+          <strong>Numéro :</strong> {{ facture.numero }}<br>
+          <strong>Date :</strong> {{ facture.date }}<br>
+          <strong>Total :</strong> {{ facture.total }}<br>
+          <!-- Affichez d'autres informations de facture selon votre modèle -->
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Aucune facture disponible.</p>
+  {% endif %}
+
+
+
 <a href="{% url 'facturation:facturer' %}" class="btn btn-secondary">Creer une facture</a>
 <a href="{% url 'website:site' %}" class="btn btn-secondary">Retour</a>
 {% endblock %}

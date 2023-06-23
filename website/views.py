@@ -51,6 +51,11 @@ def register_user(request):
             login(request, user)
             # Message success before redirect
             messages.success(request, 'Votre compte a été bien créé. Bienvenue chez vous !')
+
+            team=Team.objects.create(name="Le nom de l'équipe", created_by=request.user)
+            team.members.add(request.user)
+            team.save()
+
             return redirect('website:site')
     else:
         form = SignUpForm()
@@ -108,3 +113,4 @@ def update_record(request,pk):
 def my_account(request):
     team=Team.objects.filter(created_by=request.user).first()
     return render(request, 'myaccount.html', {'team':team})
+

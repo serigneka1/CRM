@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<di>
+   <h1> Mes todo </h1>
+</di>
+<hr>
+    {% for todo in todos %}
+        <ol> {{todo}}</ol>
+
+    {% endfor %}
+
+{% endblock %}

@@ -5,14 +5,18 @@
 <div class="py-6 px-6">
     <h1 class="text-xl mb-1 text-center">Mon compte</h1>
     <p>
-        <strong> Nom d'utilisateur:</strong>{{request.user.username}}
+        <strong>Nom d'utilisateur:</strong> {{ request.user.username }}
     </p>
     <p>
-        <strong>Equipe:</strong>{{team.name}}
+        <strong>Equipe:</strong> {{ team.name }}
+
+        {% if team.created_by == request.user %}
+        <a href="{% url 'edit_team' team.id %}"> (Modifier) </a>
+        {% endif %}
     </p>
     <hr class="mb-4">
 
-    <a href="{% url 'website:logout' %}" class="inline-block">Se déconnecter</a>
+    <a href="{% url 'website:logout' %}" class="btn btn-danger">Se déconnecter</a>
 
 </div>
 {% endblock %}
